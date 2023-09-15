@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import products from "../../api/products.json";
 import BeforeCart from "./cartButtons/BeforeCart";
 import AfterCart from "./cartButtons/AfterCart";
+import { useDispatch, useSelector } from "react-redux";
 import "./ProductList.css";
 const ProductList = () => {
-  const [count, setCount] = useState(0);
-  const addTocart = () => {
-    setCount(1);
-  };
-  console.log(count);
+  const {cartCount } = useSelector((state)=>state.cart);
+  const dispatch = useDispatch();
+  
+  
+  
   return (
     <section className="container">
       {products?.map((product, key) => (
         <div className="product-container">
           <img src={product?.image} alt="" key={key} />
           <h3>{product?.title}</h3>
-          {count > 0 ? <AfterCart/> :<BeforeCart addTocart={addTocart} />}
+          {cartCount > 0 ? <AfterCart/> :<BeforeCart   />}
         </div>
       ))}
     </section>
